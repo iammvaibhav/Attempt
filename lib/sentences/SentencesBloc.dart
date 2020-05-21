@@ -102,7 +102,8 @@ class SentencesBloc extends Bloc<SentencesEvent, SentencesState> {
 
     sentences.addAll(sentencesSet.where((sentences) => filters.isEmpty ? true : filters.every((filter) => filter.satisfies(sentences))));
 
-    yield UnlimitedSentencesState(sentences);
+    final scrollToTop = event is FilterSentencesEvent || event is ResetSentencesEvent || event is ShowSentencesForEvent;
+    yield UnlimitedSentencesState(sentences, scrollToTop: scrollToTop);
 
   }
 }

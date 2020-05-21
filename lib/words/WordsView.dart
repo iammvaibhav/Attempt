@@ -20,6 +20,7 @@ import 'FilterDropdownButton.dart';
 import 'SortDropdownButton.dart';
 
 class WordsView extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     return WordsViewState();
@@ -47,6 +48,7 @@ class WordsViewState extends State {
 
   // generates a new Random object
   final _random = new Random();
+  final _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -71,7 +73,10 @@ class WordsViewState extends State {
             ),
           );
         } else if (state is LoadedWordsState) {
+          _scrollController.animateTo(0, duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+
           return CustomScrollView(
+            controller: _scrollController,
             physics: BouncingScrollPhysics(),
             slivers: [
               SliverAppBar(

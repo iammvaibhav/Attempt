@@ -1,10 +1,8 @@
-import 'package:attempt/articles/ArticlesEvent.dart';
 import 'package:attempt/sentences/FilterDropdownButton.dart';
 import 'package:attempt/sentences/SentencesEvent.dart';
 import 'package:attempt/sentences/SentenceCellView.dart';
 import 'package:attempt/sentences/SentencesBloc.dart';
 import 'package:attempt/sentences/SentencesState.dart';
-import 'package:attempt/words/DateFilterItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,11 +15,13 @@ class SentencesView extends StatefulWidget {
 }
 
 class SentencesViewState extends State {
+  
+  ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<SentencesBloc>(context).add(LoadMoreEvent());
+    BlocProvider.of<SentencesBloc>(context).add(LoadEvent());
   }
 
   @override
@@ -41,7 +41,10 @@ class SentencesViewState extends State {
             ),
           );
         } else if (state is UnlimitedSentencesState) {
+          if (state.scrollToTop)
+            _scrollController.animateTo(0, duration: Duration(milliseconds: 200), curve: Curves.decelerate);
           return CustomScrollView(
+            controller: _scrollController,
             physics: BouncingScrollPhysics(),
             slivers: [
               SliverAppBar(
@@ -67,7 +70,7 @@ class SentencesViewState extends State {
               SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
                   if (index == state.sentences.length) { //loading view
-                    BlocProvider.of<SentencesBloc>(context).add(LoadMoreEvent());
+                    BlocProvider.of<SentencesBloc>(context).add(LoadEvent());
                     return Container(
                       child: Center(
                         child: CircularProgressIndicator(),
@@ -83,5 +86,11 @@ class SentencesViewState extends State {
         }
       },
     );
+  }
+  
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
   }
 }

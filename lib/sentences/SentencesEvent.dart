@@ -2,7 +2,7 @@ class SentencesEvent {
 
 }
 
-class LoadMoreEvent extends SentencesEvent {
+class LoadEvent extends SentencesEvent {
 
 }
 

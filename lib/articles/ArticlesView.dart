@@ -3,8 +3,6 @@ import 'dart:math';
 import 'package:attempt/home/HomeBloc.dart';
 import 'package:attempt/home/HomeEvent.dart';
 import 'package:attempt/home/ViewState.dart';
-import 'package:attempt/repository/LearningRepository.dart';
-import 'package:attempt/repository/SentencesRepository.dart';
 import 'package:attempt/search/searchBloc.dart';
 import 'package:attempt/search/searchEvent.dart';
 import 'package:attempt/showurls/ShowUrlsBloc.dart';
@@ -54,7 +52,6 @@ class ArticlesViewState extends State {
 
   @override
   Widget build(BuildContext context) {
-    LearningRepository.getInstance().increaseHitCountFor("random");
     return BlocBuilder<ArticlesBloc, ArticlesState>(
         builder: (context, state) {
           if (state is NoArticlesState) {

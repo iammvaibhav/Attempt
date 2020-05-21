@@ -70,10 +70,16 @@ class MainContentState extends State {
     return WillPopScope(
       onWillPop: () async {
         if (BlocProvider.of<SearchBloc>(context).isStackEmpty()) {
-          if (BlocProvider.of<HomeBloc>(context).currView == ViewState.DEFINITIONS_VIEW) {
+          final currView = BlocProvider.of<HomeBloc>(context).currView;
+          if (currView == ViewState.DEFINITIONS_VIEW) {
             BlocProvider.of<SearchBloc>(context).add(SearchEvent("", updateSearch: true));
             BlocProvider.of<HomeBloc>(context).add(HomeEvent(""));
             return false;
+          } else if (currView == ViewState.SENTENCES_VIEW) {
+            if (_controller.page != 0) {
+              _controller.animateToPage(0, duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+              return false;
+            } else return true;
           } else return true;
         }
         else {
