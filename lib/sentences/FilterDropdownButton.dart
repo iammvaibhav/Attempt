@@ -24,13 +24,13 @@ class FilterDropdownButtonState extends State {
         items: [
           DropdownMenuItem(
               value: "DateFilter",
-              child: DateFilterItem(() { BlocProvider.of<SentencesBloc>(context).add(FilterSentencesEvent()); }, SentencesBloc.dateFilterItemStateModel)),
+              child: DateFilterItem(() { SentencesBloc.preserveScrollPosition = false; BlocProvider.of<SentencesBloc>(context).add(FilterSentencesEvent()); }, SentencesBloc.dateFilterItemStateModel)),
           DropdownMenuItem(
               value: "AddedSentencesFilter",
-              child: AddedSentencesFilterItem(() { BlocProvider.of<SentencesBloc>(context).add(FilterSentencesEvent()); }, SentencesBloc.addedSentencesFilterItemStateModel)),
+              child: AddedSentencesFilterItem(() { SentencesBloc.preserveScrollPosition = false; BlocProvider.of<SentencesBloc>(context).add(FilterSentencesEvent()); }, SentencesBloc.addedSentencesFilterItemStateModel)),
           DropdownMenuItem(
               value: "CategoryFilter",
-              child: CategoryFilterItem(() { BlocProvider.of<SentencesBloc>(context).add(FilterSentencesEvent()); }, SentencesBloc.categoryFilterItemStateModel)),
+              child: CategoryFilterItem(() { SentencesBloc.preserveScrollPosition = false; BlocProvider.of<SentencesBloc>(context).add(FilterSentencesEvent()); }, SentencesBloc.categoryFilterItemStateModel)),
         ],
         onChanged: (value) {
           print(value);

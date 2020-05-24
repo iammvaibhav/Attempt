@@ -36,6 +36,7 @@ class WordsBloc extends Bloc<WordsEvent, WordsState> {
   
   /// Sort state model
   static final sortStateModel = SortDropdownButtonStateModel();
+  static var preserveScrollPosition = true;
 
   @override
   WordsState get initialState => LoadingWordsState();

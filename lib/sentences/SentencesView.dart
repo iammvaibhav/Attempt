@@ -41,8 +41,11 @@ class SentencesViewState extends State {
             ),
           );
         } else if (state is UnlimitedSentencesState) {
-          if (state.scrollToTop)
+
+          if (_scrollController.hasClients && !SentencesBloc.preserveScrollPosition) {
             _scrollController.animateTo(0, duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+          }
+
           return CustomScrollView(
             controller: _scrollController,
             physics: BouncingScrollPhysics(),
@@ -62,6 +65,7 @@ class SentencesViewState extends State {
                           color: Colors.black,
                         ),
                         onPressed: () {
+                          SentencesBloc.preserveScrollPosition = false;
                           BlocProvider.of<SentencesBloc>(context).add(ResetSentencesEvent());
                         },
                       )

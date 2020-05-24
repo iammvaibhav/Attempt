@@ -57,6 +57,7 @@ class SortDropdownButtonState extends State {
                 child: SortItem(e, model.sortOrder, (value) {
                   setState(() {
                     model.currValue = value;
+                    WordsBloc.preserveScrollPosition = false;
                     BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent());
                   });
                 }));
@@ -67,6 +68,7 @@ class SortDropdownButtonState extends State {
         onChanged: (value) {
           setState(() {
             model.currValue = value;
+            WordsBloc.preserveScrollPosition = false;
             BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent());
           });
         },

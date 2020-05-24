@@ -26,19 +26,19 @@ class FilterDropdownButtonState extends State {
         items: [
           DropdownMenuItem(
               value: "DateFilter",
-              child: DateFilterItem(() { BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent()); }, WordsBloc.dateFilterModel)),
+              child: DateFilterItem(() { WordsBloc.preserveScrollPosition = false; BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent()); }, WordsBloc.dateFilterModel)),
           DropdownMenuItem(
               value: "MultiWordFilter",
-              child: MultiWordFilterItem(() { BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent()); })),
+              child: MultiWordFilterItem(() { WordsBloc.preserveScrollPosition = false; BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent()); })),
           DropdownMenuItem(
               value: "DefinitionsFilter",
-              child: DefinitionsFilterItem(() { BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent()); })),
+              child: DefinitionsFilterItem(() { WordsBloc.preserveScrollPosition = false; BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent()); })),
           DropdownMenuItem(
               value: "AddedSentencesFilter",
-              child: AddedSentencesFilterItem(() { BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent()); })),
+              child: AddedSentencesFilterItem(() { WordsBloc.preserveScrollPosition = false; BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent()); })),
           DropdownMenuItem(
               value: "DownloadedSentencesFilter",
-              child: DownloadedSentencesFilterItem(() { BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent()); }))
+              child: DownloadedSentencesFilterItem(() { WordsBloc.preserveScrollPosition = false; BlocProvider.of<WordsBloc>(context).add(RefreshWordsEvent()); }))
         ],
         onChanged: (value) {
           print(value);

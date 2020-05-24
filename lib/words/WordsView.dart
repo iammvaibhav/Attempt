@@ -73,7 +73,10 @@ class WordsViewState extends State {
             ),
           );
         } else if (state is LoadedWordsState) {
-          _scrollController.animateTo(0, duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+
+          if (_scrollController.hasClients && !WordsBloc.preserveScrollPosition) {
+            _scrollController.animateTo(0, duration: Duration(milliseconds: 200), curve: Curves.decelerate);
+          }
 
           return CustomScrollView(
             controller: _scrollController,
@@ -98,6 +101,7 @@ class WordsViewState extends State {
                           color: Colors.black,
                         ),
                         onPressed: () {
+                          WordsBloc.preserveScrollPosition = false;
                           BlocProvider.of<WordsBloc>(context).add(ResetAndRefreshWordsEvent());
                         },
                       )
@@ -121,6 +125,7 @@ class WordsViewState extends State {
                                     _random.nextInt(gradients.length)])),
                         child: InkWell(
                           onTap: () {
+                            WordsBloc.preserveScrollPosition = true;
                             LearningRepository.getInstance().increaseHitCountFor(word);
                             if (state.words[index].definitions.isNotEmpty) {
                               BlocProvider.of<SearchBloc>(context).add(

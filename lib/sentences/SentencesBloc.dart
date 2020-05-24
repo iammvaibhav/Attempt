@@ -24,6 +24,9 @@ class SentencesBloc extends Bloc<SentencesEvent, SentencesState> {
   static final addedSentencesFilterItemStateModel =
       AddedSentencesFilterItemStateModel();
   static final categoryFilterItemStateModel = CategoryFilterItemStateModel();
+
+  static var preserveScrollPosition = true;
+
   String wordFilter;
 
   SentencesState get initialState => LoadingSentencesState();
@@ -102,8 +105,7 @@ class SentencesBloc extends Bloc<SentencesEvent, SentencesState> {
 
     sentences.addAll(sentencesSet.where((sentences) => filters.isEmpty ? true : filters.every((filter) => filter.satisfies(sentences))));
 
-    final scrollToTop = event is FilterSentencesEvent || event is ResetSentencesEvent || event is ShowSentencesForEvent;
-    yield UnlimitedSentencesState(sentences, scrollToTop: scrollToTop);
+    yield UnlimitedSentencesState(sentences);
 
   }
 }

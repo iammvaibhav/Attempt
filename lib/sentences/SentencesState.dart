@@ -6,8 +6,7 @@ class SentencesState {
 
 class UnlimitedSentencesState extends SentencesState {
   List<Sentence> sentences;
-  bool scrollToTop;
-  UnlimitedSentencesState(this.sentences, {this.scrollToTop = false});
+  UnlimitedSentencesState(this.sentences);
 }
 
 class NoSentencesState extends SentencesState {

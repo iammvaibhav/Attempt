@@ -5,6 +5,7 @@ import 'package:attempt/repository/model/Category.dart';
 import 'package:attempt/repository/model/Sentence.dart';
 import 'package:attempt/search/searchBloc.dart';
 import 'package:attempt/search/searchEvent.dart';
+import 'package:attempt/sentences/SentencesBloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,7 @@ class SentenceCellView extends StatelessWidget {
 
         textSpans.add(TextSpan(
           recognizer: LongPressGestureRecognizer()..onLongPress = () {
+            SentencesBloc.preserveScrollPosition = true;
             BlocProvider.of<SearchBloc>(context).add(SearchEvent(matchStr.toLowerCase(), exact: true, updateSearch: true, addToStack: true));
             BlocProvider.of<HomeBloc>(context).add(HomeEvent(matchStr.toLowerCase()));
           },
@@ -47,6 +49,7 @@ class SentenceCellView extends StatelessWidget {
         elevation: 2,
         child: InkWell(
           onTap: () {
+            SentencesBloc.preserveScrollPosition = true;
             LearningRepository.getInstance().increaseHitCountFor(sentence.word);
             BlocProvider.of<SearchBloc>(context).add(SearchEvent(sentence.word, exact: true, updateSearch: true, addToStack: true));
             BlocProvider.of<HomeBloc>(context).add(HomeEvent(sentence.word));
