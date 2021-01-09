@@ -22,10 +22,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-          child: MultiBlocProvider(
+    return Container(
+      color: Colors.blue[800],
+      child: SafeArea(
+        bottom: false,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: MultiBlocProvider(
             providers: [
               BlocProvider<SearchBloc>(
                   create: (context) => SearchBloc()
@@ -47,7 +50,8 @@ class HomeScreen extends StatelessWidget {
               )
             ],
             child: MainContent()
-          )
+          ),
+        ),
       ),
     );
   }

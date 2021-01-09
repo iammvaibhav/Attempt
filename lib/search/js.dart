@@ -11,100 +11,108 @@ const GoogleDictionaryJS =
     /**
      * Remove unwanted elements to clean things up
      */
-     
+
     if (document.getElementById("sfooter"))
         document.getElementById("sfooter").style.display = "none";
-    
+
     if (document.getElementById("extrares"))
         document.getElementById("extrares").style.display = "none";
-    
+
     if (document.getElementById("taw"))
         document.getElementById("taw").style.display = "none";
-    
+
     if (document.getElementById("qslc"))
         document.getElementById("qslc").style.display = "none";
-    
+
     if (document.getElementById("msc"))
         document.getElementById("msc").style.display = "none";
-    
+
     if (document.getElementById("sfcnt"))
         document.getElementById("sfcnt").style.display = "none";
         
+    if (document.getElementById("botstuff"))
+        document.getElementById("botstuff").style.display = "none";
+
     let wordCoach = document.querySelector("[jsname=tEutQe]")
     if (wordCoach != null) wordCoach.style.display = "none";
-    
+
     let ads1 = document.getElementsByClassName("KojFAc")
     if (ads1.length > 0) {
         document.getElementsByClassName("KojFAc")[0].style.display = "none";
     }
-    
+
     let ads2 = document.getElementsByClassName("XqIXXe")
     if (ads2.length > 0) {
         document.getElementsByClassName("XqIXXe")[0].style.display = "none"
     }
-    
+
     let ads3 = document.getElementsByClassName("u0jb6e")
     if (ads3.length > 0) {
         document.getElementsByClassName("u0jb6e")[0].style.display = "none";
+    }
+    
+    let qna = document.querySelector('[data-md="355"]')
+    if (qna != null) {
+        qna.style.display = "none";
     }
     
     let dictionaryResult = document.getElementsByClassName("kp-wholepage ss6qqb mnr-c kp-wholepage-osrp EyBRub")
     if (dictionaryResult.length > 0) {
         dictionaryResult[0].style.display = "none";
     }
-    
+
     let apps = document.getElementsByClassName("qs-io aig-lst")
     if (apps.length > 0) {
         apps[0].style.display = "none";
     } 
-    
+
     let searchResults = document.getElementsByClassName("g kno-result rQUFld kno-kp mnr-c g-blk")
     for (var i = 0; i < searchResults.length; i++) {
         searchResults[i].style.display = "none";
     }
-    
+
     let searchResults2 = document.getElementsByClassName("srg")
     for (var i = 0; i < searchResults2.length; i++) {
         searchResults2[i].style.display = "none";
     }
-    
+
     let searchResults3 = document.getElementsByClassName("mnr-c xpd O9g5cc uUPGi")
     for (let result of searchResults3) {
         result.style.display = "none";
     }
-    
+
     if (document.getElementById("center_col"))
         document.getElementById("center_col").style.paddingTop = '16px';
-    
-    
+
+
     var searchBar = document.getElementsByClassName('YaTjLb')[0] //always available combo box
-    searchBar.style.display = "none";
     searchBar.click()
-    
+    searchBar.style.display = "none";
+
     var input = document.querySelector('#sb_ifc50 > input')
     const enterKey = new KeyboardEvent("keydown", {
             bubbles: true, cancelable: true, keyCode: 13
     });
-    
+
     function onFullDefinitionClicked() {
       let word = document.querySelector('[jsname=NwvD9c]').innerText
-      
+
       //let the app know that user is now navigating to this word
       $GoogleDictionaryJSChannelName.postMessage(word);
-      let closeButton = document.querySelector('[jsaction="fire.dg_close"]')
+      let closeButton = document.querySelector('[jsaction="trigger.dBhwS"]')
       closeButton.click()
-      
+
       //now search word
       let input = document.querySelector('#sb_ifc50 > input')
-    
+
       input.value = word
       input.dispatchEvent(new KeyboardEvent("keydown", {
         bubbles: true, cancelable: true, keyCode: 13
       }));
     }
-    
+
     function setupFullDefinitionButton() {
-        let fullDefinitionButton = document.querySelector('[jsaction="fire.see_full_definition"]')
+        let fullDefinitionButton = document.querySelector('[jsaction="trigger.Lesnae"]')
         fullDefinitionButton.setAttribute("jsaction", "") //disable its functionality
         fullDefinitionButton.onclick = onFullDefinitionClicked
     }
@@ -144,6 +152,7 @@ const GoogleDictionaryJS =
        
       return oldXHROpen.apply(this, arguments);
     }
+    123;
     """;
 
 const VocabularyJS =
@@ -181,6 +190,7 @@ const VocabularyJS =
     const enterKey = new KeyboardEvent("keydown", {
         bubbles: true, cancelable: true, keyCode: 13
     });
+    123;
     """;
 
 const FreeDictionaryJS =
@@ -195,20 +205,23 @@ const FreeDictionaryJS =
       document.querySelector("#content > div > aside").style.display = "none"
     }
     document.querySelector("#footer").style.display = "none"
+    123;
     """;
 
 
 String googleDictionaryJSSearchFor(String word) {
     return
       """
+      searchBar.click()
       if (input == null) {
           input = document.querySelector('#sb_ifc50 > input')
       }
-        
+
       input.value = "$word"
       input.dispatchEvent(new KeyboardEvent("keydown", {
           bubbles: true, cancelable: true, keyCode: 13
       }));
+      123;
       """;
 }
 
@@ -265,6 +278,7 @@ String vocabularyJSSearchFor(String word) {
       
         monitorLinks()
       })
+      123;
       """;
 }
 
@@ -274,5 +288,6 @@ String freeDictionaryJSSearchFor(String word) {
           input = document.querySelector("#f1Word")
           input.value = "$word"
           input.parentElement.lastElementChild.click()
+          123;
         """;
 }

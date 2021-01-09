@@ -3,7 +3,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_stetho/flutter_stetho.dart';
 
 import 'home/HomeScreen.dart';
 
@@ -14,7 +13,6 @@ void main() {
       systemNavigationBarColor: Colors.black
   ));
 
-  Stetho.initialize();
   runApp(MyApp());
   FirebaseDatabase.instance.setPersistenceEnabled(true);
   FirebaseDatabase.instance.reference().child("words").keepSynced(true);

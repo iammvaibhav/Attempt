@@ -32,7 +32,7 @@ class SearchContainer extends StatelessWidget {
                   builder: (context, state) {
                     return IconButton(
                       padding: EdgeInsets.zero,
-                      icon: Icon(Icons.arrow_back_ios),
+                      icon: Icon(Icons.arrow_back_ios_outlined),
                       onPressed: state.backEnabled ? () {
                         final toSearch = BlocProvider.of<SearchBloc>(context).getEventFromStack();
                         BlocProvider.of<SearchBloc>(context).add(SearchEvent(toSearch, exact: true, updateSearch: true, addToStack: false));

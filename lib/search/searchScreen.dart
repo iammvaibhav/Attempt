@@ -83,6 +83,9 @@ class DefinitionWebViewState extends State {
                 print("JS injected");
                 if (!_loaded.isCompleted)
                   _loaded.complete();
+              }, onError: (error) {
+                print("on error:");
+                print(error);
               });
             });
           },
